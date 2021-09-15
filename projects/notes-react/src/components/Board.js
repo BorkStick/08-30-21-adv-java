@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import '../css/Board.css';
 import Note from './Note';
+import myFirebase from '../utility/myFirebase';
+import { onValue } from 'firebase/database';
+ 
 
 class Board extends Component {
   constructor() {
@@ -8,6 +11,11 @@ class Board extends Component {
     this.state = {
       notes: []
     }
+    this.firebaseDBRef = myFirebase.getFirebaseRef();
+    onValue(this.firebaseDBref, (snapshot) => console.log(snapshot.val()), {
+      onlyOnce: true,
+  })
+
   }
 
   addNote() {
